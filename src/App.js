@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
 
@@ -24,44 +24,43 @@ class App extends React.Component {
         }
       ]
     };
-
-    toggleItem = id => {
-      console.log(id);
-      
-      this.setState({
-        todos: this.state.todos.map(item => {
-          if (item.id === id) {
-            return {
-              ...item,
-              
-              completed: !item.completed
-            };
-          } else {
-            return item;
-          }
-        })
-      });
-    };
-  
-    addItem = itemName => {
-      const newItem = {
-        task: itemName,
-        id: Date.now(),
-        completed: false
-      };
-      this.setState({
-        todos: [...this.state.todos, newItem]
-      });
-    };
-  
-    clearTodo = () => {
-      this.setState({
-        todos: this.state.todos.filter(item => !item.completed)
-      });
-    };
-  
-
   }
+
+  toggleItem = id => {
+    console.log(id);
+    
+    this.setState({
+      todos: this.state.todos.map(item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            
+            completed: !item.completed
+          };
+        } else {
+          return item;
+        }
+      })
+    });
+  };
+
+  addItem = itemName => {
+    const newItem = {
+      task: itemName,
+      id: Date.now(),
+      completed: false
+    };
+    this.setState({
+      todos: [...this.state.todos, newItem]
+    });
+  };
+
+  clearTodo = () => {
+    this.setState({
+      todos: this.state.todos.filter(item => !item.completed)
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -72,7 +71,7 @@ class App extends React.Component {
           <TodoList
           todos={this.state.todos}
           toggleItem={this.toggleItem}/>
-          <TodoForm addItem={this.item}/>
+          <TodoForm addItem={this.addItem} clearTodo={this.clearTodo}/>
         </div>
 
       </div>
